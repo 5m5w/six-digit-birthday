@@ -1,0 +1,12 @@
+#原照服員資料的出生年月日，格式不均，正確應為 7 碼（0761123）
+#因此將只有 6 碼的（761123），前面加上一個 0 
+
+import pandas as pd
+
+df = pd.read_excel('照服員資料.xlsx', '工作表1')
+
+for index, row in df.iterrows():
+    birthDay = str(row['出生年月日'])
+    if len(birthDay) == 6:
+        birthDay = '0' + birthDay
+        print(birthDay)
