@@ -1,0 +1,23 @@
+# six-digit-birthday
+
+import pandas as pd
+
+#讀取 Spyder 預設路徑層的excel檔
+df = pd.read_excel('照服員資料.xlsx', '工作表1')
+
+#用 iterrows函式迭代讀取每個row
+for index, row in df.iterrows():
+    birthDay = str(row['出生年月日'])
+    #將數值長度長度為 6 的數值，前面加上一個 0 
+    if len(birthDay) == 6:
+        birthDay = '0' + birthDay
+        df['出生年月日'][index] = birthDay
+# 卡住中
+# 接下來要將出生年月日做年齡的計算，但要排除掉 Nan值，否則無法完成
+
+
+# 將資料型態全部轉為 int 
+# df['出生年月日'] = df['出生年月日'].astype(int)
+
+# #創建一個新的欄位在出生年月日的旁邊，做年齡的計算
+# df.insert(4, '年齡', 0)
