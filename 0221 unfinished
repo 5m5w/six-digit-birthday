@@ -3,10 +3,12 @@ import pandas as pd
 #讀取 Spyder 預設路徑層的excel檔
 df = pd.read_excel('照服員資料.xlsx', '工作表1')
 
-for i in df['出生年月日'][0:10]:
-    x = str(i)
+df1 = df['出生年月日']
+for i,row in enumerate(df1):
+    x = str(row)
     y = x.split('.')
     g = '0' + y[0]
+    df.iloc[i, 3] = g
     
 #用 iterrows函式迭代讀取每個row
 # for index, row in df.iterrows():
