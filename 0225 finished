@@ -1,0 +1,31 @@
+import pandas as pd
+
+#讀取 Spyder 預設路徑層的excel檔
+df = pd.read_excel('照服員資料.xlsx', '工作表1')
+
+#創建一個新的欄位在出生年月日的旁邊，做年齡的計算
+df.insert(4, '年齡', 0)
+
+# 抓取出生年月日欄存入 bd_DF
+bd_DF = df['出生年月日']
+bd_DF.fillna('0')
+
+# 用enumerate 抓取每一個出生年月日資料
+for i,row in enumerate(bd_DF):
+    # 將資料轉為字串，並存入 bd_str1
+    bd_str1 = str(row)
+    # bd_str1抓到的資料為浮點數的資料，因此用 split 分開浮點數，存入 bd_str2
+    bd_str2 = bd_str1.split('.')
+    # 去除浮點數，並抓取浮點數前面的數值
+    bd = 1120101 - int(bd_str2[0])
+    bd = str(bd)
+    df.loc[i, '年齡'] = bd[:2]
+
+df.to_excel('照服員資料0221.xlsx', index=False)
+
+# 取前三個數字
+# for index, row in df.iterrows():    
+#     str_num = str(row['出生年月日'])
+#     num_first_three = int(str_num[:2])
+#     result = 112 - num_first_three
+#     df['年齡'][index] = result
